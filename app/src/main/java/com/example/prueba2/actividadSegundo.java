@@ -21,9 +21,9 @@ public class actividadSegundo extends AppCompatActivity {
     private ListView ltvnombres;
     private Button btnFiltrar;
 
-    private ArrayAdapter<String> adaptadorTareaLista;
+    private ArrayAdapter<Tarea> adaptadorTareaLista;
 
-    private ArrayList<String> arr;
+    private ArrayList<Tarea> losTareaLista;
 
 
     @Override
@@ -34,11 +34,10 @@ public class actividadSegundo extends AppCompatActivity {
         referencia();
         eventos();
 
-        Bundle b = getIntent().getExtras();
-        ArrayList<String> arr = b.getStringArrayList("list");
 
+        losTareaLista = (ArrayList<Tarea>) getIntent().getSerializableExtra("list");
 
-        adaptadorTareaLista = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arr);
+        adaptadorTareaLista = new ArrayAdapter<Tarea>(this, android.R.layout.simple_list_item_1, losTareaLista);
         ltvnombres.setAdapter(adaptadorTareaLista);
     }
 
@@ -55,9 +54,9 @@ public class actividadSegundo extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                arr.remove(i);
+                losTareaLista.remove(i);
                 adaptadorTareaLista.notifyDataSetChanged();
-                return false;
+                return true;
 
             }
 
@@ -74,7 +73,8 @@ public class actividadSegundo extends AppCompatActivity {
         tilBuscar = findViewById(R.id.tilBuscar);
         btnFiltrar = findViewById(R.id.btnFiltrar);
 
-        arr = new ArrayList<String>();
+        losTareaLista = new ArrayList<Tarea>();
+
 
     }
 }
