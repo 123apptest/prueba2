@@ -21,9 +21,9 @@ public class actividadSegundo extends AppCompatActivity {
     private ListView ltvnombres;
     private Button btnFiltrar;
 
-    private ArrayAdapter<Tarea> adaptadorTareaLista;
+    private ArrayAdapter<String> adaptadorTareaLista;
 
-    private ArrayList<Tarea> losTareaLista;
+    private ArrayList<String> arr;
 
 
     @Override
@@ -32,11 +32,13 @@ public class actividadSegundo extends AppCompatActivity {
         setContentView(R.layout.activity_actividad_segundo);
 
         referencia();
-        obteneDatos();
         eventos();
 
+        Bundle b = getIntent().getExtras();
+        ArrayList<String> arr = b.getStringArrayList("list");
 
-        adaptadorTareaLista = new ArrayAdapter<Tarea>(this, android.R.layout.simple_list_item_1, losTareaLista);
+
+        adaptadorTareaLista = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arr);
         ltvnombres.setAdapter(adaptadorTareaLista);
     }
 
@@ -45,13 +47,15 @@ public class actividadSegundo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String dato = tilBuscar.getEditText().getText().toString();
-
+                adaptadorTareaLista.getFilter().filter(dato);
+                ltvnombres.setAdapter(adaptadorTareaLista);
             }
         });
         ltvnombres.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                losTareaLista.remove(i);
+
+                arr.remove(i);
                 adaptadorTareaLista.notifyDataSetChanged();
                 return false;
 
@@ -61,24 +65,7 @@ public class actividadSegundo extends AppCompatActivity {
 
     }
 
-    private void obteneDatos() {
 
-        for(int x = 1; x <= 25; ++x){
-            Tarea i = new Tarea();
-            i.setTitulo("Item " + x);
-            i.setDescripcion("Sub item " + x);
-            losTareaLista.add(i);
-        }
-
-        String titulo = getIntent().getExtras().getString("datoTitulo");
-        String descripcion = getIntent().getExtras().getString("datoDescripcion");
-        Tarea i = new Tarea();
-        i.setTitulo(titulo);
-        i.setDescripcion(descripcion);
-        losTareaLista.add(i);
-
-
-    }
 
 
     private void referencia() {
@@ -87,7 +74,7 @@ public class actividadSegundo extends AppCompatActivity {
         tilBuscar = findViewById(R.id.tilBuscar);
         btnFiltrar = findViewById(R.id.btnFiltrar);
 
-        losTareaLista = new ArrayList<Tarea>();
+        arr = new ArrayList<String>();
 
     }
 }

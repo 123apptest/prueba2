@@ -26,7 +26,7 @@
         app:counterEnabled="true"
         app:counterMaxLength="20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/btnBuscar"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -68,4 +68,5 @@
         android:text="MODIFICAR"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilDescripcion" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
