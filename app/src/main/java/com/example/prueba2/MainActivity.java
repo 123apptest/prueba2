@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!encontrado){
                     Toast.makeText(MainActivity.this, "Tarea no existe", Toast.LENGTH_SHORT).show();
                 }
-
+                
             }
         });
 
@@ -103,17 +103,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void segundoActividad() {
-        String titulo = tilTitulo.getEditText().getText().toString();
-        String descripcion = tilDescripcion.getEditText().getText().toString();
+            String titulo = tilTitulo.getEditText().getText().toString();
+            String descripcion = tilDescripcion.getEditText().getText().toString();
 
 
-        Intent segundoPantalla = new Intent(this, actividadSegundo.class);
+            Intent segundoPantalla = new Intent(getBaseContext(), actividadSegundo.class);
 
-//            segundoPantalla.putExtra("datoTitulo", titulo);
-//            segundoPantalla.putExtra("datoDescripcion", descripcion);
-        segundoPantalla.putExtra("list",losTareaLista);
+            segundoPantalla.putExtra("list", losTareaLista);
 
-        startActivity(segundoPantalla);
+            startActivity(segundoPantalla);
     }
 
     private void refecrencia() {
