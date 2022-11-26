@@ -34,27 +34,37 @@ public class actividadSegundo extends AppCompatActivity {
         referencia();
         eventos();
 
-
+        // recibir arraylist desde primera actividad
         losTareaLista = (ArrayList<Tarea>) getIntent().getSerializableExtra("list");
 
+        // modificar adaptador y llena adptador con arraylist de Tarea
         adaptadorTareaLista = new ArrayAdapter<Tarea>(this, android.R.layout.simple_list_item_1, losTareaLista);
         ltvnombres.setAdapter(adaptadorTareaLista);
     }
 
     private void eventos() {
+        // Funcion para Botton Filtrat
         btnFiltrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Obtener Datos en TextInputLayout
                 String dato = tilBuscar.getEditText().getText().toString();
+
+                //Filtrar datos
                 adaptadorTareaLista.getFilter().filter(dato);
+
+                // Actualiza Datos para mustrar
                 ltvnombres.setAdapter(adaptadorTareaLista);
             }
         });
+        // Funcion Para ListView, cuando presiona largo tiempo y eliminar item
         ltvnombres.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                //eliminar item
                 losTareaLista.remove(i);
+
+                //Actualizar Datos para muestrar
                 adaptadorTareaLista.notifyDataSetChanged();
                 return true;
 
@@ -66,7 +76,7 @@ public class actividadSegundo extends AppCompatActivity {
 
 
 
-
+    // conecta diseña y java
     private void referencia() {
 
         ltvnombres = findViewById(R.id.ltvnombres);
